@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pine Hill Fire Company No.1., Inc.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;600&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #C0001E;
+      --red-dark: #8B0015;
+      --gold: #C9A84C;
+      --gold-light: #E8C97A;
+      --black: #0E0E0E;
+      --charcoal: #1C1C1C;
+      --offwhite: #F5F0E8;
+      --text: #2A2A2A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      background: var(--offwhite);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--black);
+      border-bottom: 3px solid var(--gold);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.35rem;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-logo .badge {
+      width: 34px;
+      height: 34px;
+      background: var(--red);
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--offwhite);
+      text-decoration: none;
+      transition: color 0.2s;
+      padding-bottom: 2px;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+
+    /* ── PAGES ── */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ── HERO ── */
+    .hero {
+      background:
+        linear-gradient(to bottom, rgba(14,14,14,0.62) 0%, rgba(14,14,14,0.75) 100%),
+        url('images/PHFC-R4610.jpeg') center center / cover no-repeat;
+      position: relative;
+      overflow: hidden;
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: transparent;
+    }
+
+    .hero-emblem {
+      font-size: 5rem;
+      line-height: 1;
+      margin-bottom: 1.2rem;
+      position: relative;
+      display: inline-block;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      letter-spacing: 0.06em;
+      color: var(--offwhite);
+      line-height: 1.05;
+      position: relative;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-top: 0.6rem;
+      position: relative;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+
+    .hero-divider {
+      width: 80px;
+      height: 3px;
+      background: var(--red);
+      margin: 1.5rem auto;
+      position: relative;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    .hero-tagline {
+      color: #B0A898;
+      font-style: italic;
+      font-size: 1.1rem;
+      max-width: 520px;
+      margin: 0 auto;
+      position: relative;
+      animation: fadeUp 0.8s 0.4s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── CONTENT SECTIONS ── */
+    .content-wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem;
+    }
+
+    .section-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.4rem;
+      letter-spacing: 0.04em;
+      color: var(--charcoal);
+      margin-bottom: 1rem;
+    }
+
+    .section-rule {
+      width: 50px;
+      height: 3px;
+      background: var(--gold);
+      margin-bottom: 1.8rem;
+    }
+
+    /* ── MISSION ── */
+    .mission-block {
+      background: var(--charcoal);
+      color: var(--offwhite);
+      border-left: 5px solid var(--red);
+      padding: 2rem 2.5rem;
+      margin-bottom: 3rem;
+      font-size: 1.1rem;
+      line-height: 1.75;
+      font-style: italic;
+    }
+
+    /* ── CARDS ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #DDD5C5;
+      border-top: 4px solid var(--red);
+      padding: 1.8rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+    }
+
+    .card-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+
+    .card h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: #555;
+    }
+
+    /* ── SUPPORT SECTION ── */
+    .support-section {
+      background: white;
+      border: 1px solid #DDD5C5;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .support-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    @media (max-width: 600px) {
+      .support-grid { grid-template-columns: 1fr; }
+    }
+
+    .support-box {
+      border: 2px solid var(--gold);
+      padding: 2rem;
+      text-align: center;
+      background: var(--offwhite);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .support-box .icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+
+    .support-box h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.15rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+
+    .support-box p {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 1.2rem;
+      line-height: 1.5;
+      flex-grow: 1;
+    }
+
+    .btn {
+      display: inline-block;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.7rem 1.6rem;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-red {
+      background: var(--red);
+      color: white;
+    }
+    .btn-red:hover { background: var(--red-dark); }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--black);
+    }
+    .btn-gold:hover { background: var(--gold-light); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--red);
+      border: 2px solid var(--red);
+    }
+    .btn-outline:hover { background: var(--red); color: white; }
+
+    /* ── EVENTS ── */
+    .event-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+
+    .event-item {
+      background: white;
+      border: 1px solid #DDD5C5;
+      border-left: 5px solid var(--red);
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: transform 0.2s;
+    }
+
+    .event-item:hover { transform: translateX(4px); }
+
+    .event-date {
+      background: var(--red);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .event-date .month {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+
+    .event-date .day {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      line-height: 1;
+    }
+
+    .event-body {
+      padding: 1rem 1.3rem;
+    }
+
+    .event-body h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      margin-bottom: 0.2rem;
+    }
+
+    .event-body p {
+      font-size: 0.88rem;
+      color: #666;
+    }
+
+    .event-time {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.8rem;
+      color: var(--red);
+      margin-top: 0.3rem;
+      letter-spacing: 0.05em;
+    }
+
+    .events-note {
+      background: #FFF8E7;
+      border: 1px solid var(--gold);
+      padding: 1.2rem 1.5rem;
+      font-size: 0.9rem;
+      color: #6B5300;
+      font-style: italic;
+    }
+
+    /* ── TEAM ── */
+    .officer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .officer-card {
+      background: white;
+      border: 1px solid #DDD5C5;
+      padding: 1.8rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .officer-avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: var(--charcoal);
+      border: 3px solid var(--gold);
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+    }
+
+    .officer-card h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      color: var(--charcoal);
+      margin-bottom: 0.2rem;
+    }
+
+    .officer-rank {
+      font-size: 0.8rem;
+      color: var(--red);
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .join-section {
+      background: var(--black);
+      color: var(--offwhite);
+      padding: 3rem 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .join-section::before {
+      content: '🚒';
+      position: absolute;
+      font-size: 12rem;
+      opacity: 0.04;
+      right: -1rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .join-section h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.5rem;
+    }
+
+    .join-section h2 span { color: var(--gold); }
+
+    .join-section p {
+      color: #AAA;
+      max-width: 520px;
+      margin: 0 auto 1.8rem;
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      border-top: 3px solid var(--red);
+      color: #888;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.85rem;
+    }
+
+    footer strong {
+      display: block;
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      margin-bottom: 0.3rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#" onclick="showPage('home')">
+      <span class="badge">🔥</span>
+      PHFC No. 1
+    </a>
+    <ul class="nav-links">
+      <li><a href="#" id="nav-home" class="active" onclick="showPage('home')">Home</a></li>
+      <li><a href="#" id="nav-events" onclick="showPage('events')">Events</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══════════════════════════════ HOME ═══════════════════════════════ -->
+  <div class="page active" id="page-home">
+
+    <div class="hero">
+      
+      <h1 style="font-size: clamp(1.6rem, 4.5vw, 3.2rem);">Pine Hill Fire Company <span>No.1., Inc.</span></h1>
+      <div class="hero-sub">100% Volunteer. 24/7 Response.</div>
+      <div class="hero-divider"></div>
+      <p class="hero-tagline">When the alarm sounds, we respond. Day or night. No exceptions.</p>
+    </div>
+
+    <div class="content-wrap">
+
+      <div class="mission-block">
+        We are a volunteer fire company serving Pine Hill and surrounding communities. Our members respond to fires, vehicle accidents, and emergency calls every day of the year.<br><br>
+        We do this with no paid staff. Every response is your neighbor showing up.
+      </div>
+
+      <div class="section-label">Who We Are</div>
+      <div class="section-title">What We Do</div>
+      <div class="section-rule"></div>
+      <p style="color:#555; line-height:1.7; max-width:680px; margin-bottom:1.8rem;">We handle real calls. Real emergencies. Real consequences.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🧯</div>
+          <h3>Fire Suppression</h3>
+          <p>We respond to structure fires, chimney fires, vehicle fires, and wildland incidents. Our crews train year-round to operate safely and aggressively when it matters.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚑</div>
+          <h3>Emergency Response</h3>
+          <p>We support medical calls, vehicle accidents, and mutual aid incidents across the region. We work alongside EMS and neighboring departments to stabilize scenes quickly.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏘️</div>
+          <h3>Community Protection</h3>
+          <p>We are funded by a mix of town support and community donations. Every dollar goes back into equipment, training, and keeping this company operational.</p>
+        </div>
+      </div>
+
+      <!-- SUPPORT -->
+      <div class="support-section">
+        <div class="section-label">Support the Company</div>
+        <div class="section-title">Support the Company</div>
+        <div class="section-rule"></div>
+        <p style="color:#555; line-height:1.7; max-width:600px;">We are a 501(c)(3) volunteer fire company. Your support directly funds the gear, equipment, and training required to respond when you call.</p>
+
+        <ul style="margin: 1.2rem 0 1.5rem 1.2rem; color:#555; line-height:2; font-size:0.95rem;">
+          <li>Turnout gear and safety equipment</li>
+          <li>Apparatus maintenance and fuel</li>
+          <li>Training and certifications</li>
+          <li>Station upkeep and utilities</li>
+        </ul>
+
+        <div class="support-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+          <div class="support-box">
+            <div class="icon">💛</div>
+            <h3>Donate via PayPal</h3>
+            <p>Make a direct contribution to support operations. Every dollar stays local.</p>
+            <a class="btn btn-red" href="https://www.paypal.com/donate/?hosted_button_id=2BXRTGRMPLXS6" target="_blank">Donate Now</a>
+          </div>
+          <div class="support-box">
+            <div class="icon">📦</div>
+            <h3>Amazon Wish List</h3>
+            <p>Purchase needed supplies and have them shipped directly to the firehouse.</p>
+            <a class="btn btn-gold" href="https://a.co/0fjIJZ5a" target="_blank">View Registry</a>
+          </div>
+          <div class="support-box">
+            <div class="icon">🚒</div>
+            <h3>Join Our Team</h3>
+            <p>We are looking for Firefighters, Fire Police (BEFO), and Auxiliary members. All are welcome.</p>
+            <a class="btn btn-outline" href="https://forms.gle/hLowc9L8jYobqDzC6" target="_blank">Get Involved</a>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ EVENTS ═══════════════════════════════ -->
+  <div class="page" id="page-events">
+
+    <div class="hero" style="padding: 3rem 2rem 2.5rem;">
+      <h1 style="font-size: clamp(2rem,5vw,3.2rem);">Upcoming <span>Events</span></h1>
+      <div class="hero-sub">Community Gatherings &amp; Fundraisers</div>
+    </div>
+
+    <div class="content-wrap">
+
+      <div class="section-label">On the Calendar</div>
+      <div class="section-title">Upcoming Events</div>
+      <div class="section-rule"></div>
+      <p style="color:#555; line-height:1.7; max-width:600px; margin-bottom:1.8rem;">Community events help fund operations and keep the fire company connected to the people we serve.</p>
+
+      <!-- NO UPCOMING EVENTS -->
+      <div class="events-note" style="margin-bottom:3rem;">
+        📅 No events are currently scheduled. Check back soon — we have plenty in store for the community.
+      </div>
+
+      <!-- PAST EVENTS -->
+      <div class="section-label">Past Events</div>
+      <div class="section-title">Thank You, Pine Hill</div>
+      <div class="section-rule"></div>
+
+      <div class="event-list">
+        <div class="event-item">
+          <div class="event-date" style="background:var(--charcoal);">
+            <span class="month">Mar</span>
+            <span class="day">28</span>
+          </div>
+          <div class="event-body">
+            <h3>Italian Dinner Fundraiser <span style="font-family:'Source Serif 4',serif; font-size:0.8rem; color:var(--gold); text-transform:none; font-weight:normal; letter-spacing:0;">— Thank You!</span></h3>
+            <p>What a night. Our Italian Dinner Fundraiser was a tremendous success thanks to the generosity of our community. Rigatoni, meatballs, broccoli rabe, salads, desserts, and a 50/50 raffle — the firehouse was packed and the support was overwhelming. We are grateful for every person who came out.</p>
+            <div class="event-time" style="margin-top:0.4rem; color:#999;">📍 Pine Hill Firehouse · 265 Main Street, Pine Hill, NY 12465</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ TEAM ═══════════════════════════════ -->
+  <div class="page" id="page-team">
+
+    <div class="hero" style="padding: 3rem 2rem 2.5rem;">
+      <h1 style="font-size: clamp(2rem,5vw,3.2rem);">Our <span>Team</span></h1>
+      <div class="hero-sub">The Volunteers Who Answer the Call</div>
+    </div>
+
+    <div class="content-wrap">
+
+      <div class="section-label">Leadership</div>
+      <div class="section-title">The People Behind the Response</div>
+      <div class="section-rule"></div>
+      <p style="color:#555; line-height:1.7; max-width:600px; margin-bottom:1.8rem;">These are the members who respond when the alarm sounds. All volunteer. All trained. All committed.</p>
+
+      <!-- SAMPLE OFFICERS — replace with real names/titles -->
+      <div class="officer-grid">
+        <div class="officer-card">
+          <div class="officer-avatar">👨‍🚒</div>
+          <h3>[ Chief's Name ]</h3>
+          <div class="officer-rank">Fire Chief</div>
+        </div>
+        <div class="officer-card">
+          <div class="officer-avatar">👨‍🚒</div>
+          <h3>[ Name ]</h3>
+          <div class="officer-rank">Assistant Chief</div>
+        </div>
+        <div class="officer-card">
+          <div class="officer-avatar">👩‍🚒</div>
+          <h3>[ Name ]</h3>
+          <div class="officer-rank">Captain</div>
+        </div>
+        <div class="officer-card">
+          <div class="officer-avatar">👨‍🚒</div>
+          <h3>[ Name ]</h3>
+          <div class="officer-rank">Lieutenant</div>
+        </div>
+        <div class="officer-card">
+          <div class="officer-avatar">👩‍🚒</div>
+          <h3>[ Name ]</h3>
+          <div class="officer-rank">Treasurer</div>
+        </div>
+        <div class="officer-card">
+          <div class="officer-avatar">👨‍🚒</div>
+          <h3>[ Name ]</h3>
+          <div class="officer-rank">Secretary</div>
+        </div>
+      </div>
+
+      <!-- JOIN CTA -->
+      <div class="join-section">
+        <h2>Join <span>Our Team</span></h2>
+        <p>We're always looking for dedicated community members to join Pine Hill Fire Company No. 1. No experience necessary — we provide all the training you need.</p>
+        <!-- Replace href with your actual Google Form link -->
+        <a class="btn btn-gold" href="https://forms.google.com" target="_blank">Apply for Membership</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <strong>Pine Hill Fire Company No.1., Inc.</strong>
+    265 Main Street &nbsp;·&nbsp; Pine Hill, NY 12465<br style="margin-bottom:0.3rem;">
+    <span style="display:inline-block; margin-top:0.4rem;">A 501(c)(3) Volunteer Fire Organization &nbsp;·&nbsp; All Rights Reserved</span><br>
+    <span style="display:inline-block; margin-top:0.3rem; color:var(--gold); font-family:'Oswald',sans-serif; letter-spacing:0.1em; font-size:0.8rem;">pinehillfirecompany.org</span>
+  </footer>
+
+  <script>
+    function showPage(page) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+      document.getElementById('page-' + page).classList.add('active');
+      document.getElementById('nav-' + page).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return false;
+    }
+
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.addEventListener('click', e => e.preventDefault());
+    });
+  </script>
+
+</body>
+</html>
